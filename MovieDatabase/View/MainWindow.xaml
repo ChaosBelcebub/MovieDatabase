@@ -34,8 +34,13 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
-            <DataGrid Grid.Column="0" ItemsSource="{Binding Path=movies}" AutoGenerateColumns="True" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
-                
+            <DataGrid Grid.Column="0" ItemsSource="{Binding Path=movies}" AutoGenerateColumns="True" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectedItem="{Binding Path=selectedMovie, Mode=TwoWay}">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit" Command="{Binding openEditCommand}"></MenuItem>
+                        <MenuItem Header="Remove" Command="{Binding deleteMovieCommand}"></MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

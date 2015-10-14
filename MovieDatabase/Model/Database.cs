@@ -57,5 +57,19 @@ namespace MovieDatabase.Model
             SQLiteCommand command = new SQLiteCommand(sql, DatabaseConnection.instance);
             command.ExecuteNonQuery();
         }
+
+        public void edit(Movie movie)
+        {
+            string sql = "update movies set name = '" + movie.name + "', director = '" + movie.director + "', location = '" + movie.location + "' where rowid = '" + movie.getID() + "';";
+            SQLiteCommand command = new SQLiteCommand(sql, DatabaseConnection.instance);
+            command.ExecuteNonQuery();
+        }
+
+        public void delete(Movie movie)
+        {
+            string sql = "delete from movies where rowid = '" + movie.getID() + "';";
+            SQLiteCommand command = new SQLiteCommand(sql, DatabaseConnection.instance);
+            command.ExecuteNonQuery();
+        }
     }
 }

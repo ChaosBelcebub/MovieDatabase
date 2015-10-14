@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using MovieDatabase.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,9 +19,9 @@ namespace MovieDatabase.View
     /// <summary>
     /// Interaction logic for AddMovieView.xaml
     /// </summary>
-    public partial class AddMovieView : Window
+    public partial class EditMovieView : Window
     {
-        public AddMovieView()
+        public EditMovieView()
         {
             InitializeComponent();
         }
@@ -31,11 +30,8 @@ namespace MovieDatabase.View
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
-            {
                 this.LocationTextBox.Text = openFileDialog.FileName;
-                var viewModel = DataContext as AddMovieViewModel;
-                viewModel.location = this.LocationTextBox.Text;
-            }
+
         }
     }
 }
