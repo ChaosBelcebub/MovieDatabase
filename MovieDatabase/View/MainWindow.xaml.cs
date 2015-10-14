@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MovieDatabase.View;
 
 namespace MovieDatabase
 {
@@ -23,6 +24,17 @@ namespace MovieDatabase
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MenuItemClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new AddMovieView();
+            win.ShowDialog();
         }
     }
 }
