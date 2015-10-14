@@ -30,7 +30,7 @@ namespace MovieDatabase.View
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
-                LocationTextBox.Text = File.ReadAllText(openFileDialog.FileName);
+                this.LocationTextBox.Text = openFileDialog.FileName;
 
         }
     }

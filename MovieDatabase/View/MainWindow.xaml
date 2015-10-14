@@ -1,7 +1,13 @@
 ﻿<Window x:Class="MovieDatabase.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MovieDatabase" Height="350" Width="525">
+        xmlns:vm="clr-namespace:MovieDatabase.ViewModel"
+        xmlns:m="clr-namespace:MovieDatabase.Model"
+        Title="MovieDatabase" Height="350" Width="525"
+        DataContext="{DynamicResource MainWindowViewModel}">
+    <Window.Resources>
+        <vm:MainWindowViewModel x:Key="MainWindowViewModel"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -10,9 +16,9 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Height="25" VerticalAlignment="Top">
             <MenuItem Header="Datei">
-                <MenuItem Header="Reload Database" HorizontalAlignment="Left" Command="">
+                <MenuItem Header="Reload Database" HorizontalAlignment="Left" Command="{Binding loadDatabaseCommand, Mode=Default}">
                 </MenuItem>
-                <MenuItem Header="Add Movie" HorizontalAlignment="Left" Command="">
+                <MenuItem Header="Add Movie" HorizontalAlignment="Left" Click="Button_Click">
                 </MenuItem>
                 <Separator HorizontalAlignment="Left" Width="145"/>
                 <MenuItem Header="Exit" HorizontalAlignment="Left" Click="MenuItemClose_Click">
@@ -28,7 +34,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
-            <DataGrid Grid.Column="0" AutoGenerateColumns="True" CanUserAddRows="False">
+            <DataGrid Grid.Column="0" ItemsSource="{Binding Path=movies}" AutoGenerateColumns="True" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
                 
             </DataGrid>
             <Grid Grid.Column="1">

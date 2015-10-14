@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MovieDatabase.View;
+using MovieDatabase.ViewModel;
 
 namespace MovieDatabase
 {
@@ -33,8 +34,14 @@ namespace MovieDatabase
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var win = new AddMovieView();
+            var vm = new AddMovieViewModel();
+            var win = new AddMovieView { DataContext = vm };
+            vm.OnRequestClose += (s, ev) => win.Close();
+            
             win.ShowDialog();
+
+            var viewModel = DataContext as MainWindowViewModel;
+            viewModel.loadDatabase();
         }
     }
 }

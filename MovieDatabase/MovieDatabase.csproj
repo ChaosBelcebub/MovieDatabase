@@ -36,6 +36,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\MemberDatabase\MemberDatabase\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -66,7 +69,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\BaseModel.cs" />
+    <Compile Include="Model\Database.cs" />
+    <Compile Include="Model\DatabaseConnection.cs" />
     <Compile Include="Model\Movie.cs" />
+    <Compile Include="Model\MovieList.cs" />
+    <Compile Include="Model\RelayCommand.cs" />
+    <Compile Include="ViewModel\AddMovieViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\AddMovieView.xaml.cs">
       <DependentUpon>AddMovieView.xaml</DependentUpon>
     </Compile>
@@ -102,9 +112,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
