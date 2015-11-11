@@ -82,30 +82,7 @@ namespace MovieDatabase.ViewModel
         }
 
         /// <summary>
-        /// ICommand addCommand. Calls the addmember() method
-        /// </summary>
-        public ICommand editCommand
-        {
-            get
-            {
-                if (this.editCommandP == null)
-                {
-                    this.editCommandP = new RelayCommand(param => this.editMovie());
-                }
-                return this.editCommandP;
-            }
-        }
-
-        private void editMovie()
-        {
-            Movie movie = new Movie { name = name, director = director, location = location };
-            movie.setID(id);
-            db.edit(movie);
-            OnRequestClose(this, new EventArgs());
-        }
-
-        /// <summary>
-        /// Initializes a new empty instance of the AddMovieViewModel class
+        /// Initializes a new empty instance of the EditMovieViewModel class
         /// </summary>
         public EditMovieViewModel()
         {
@@ -117,7 +94,7 @@ namespace MovieDatabase.ViewModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the AddMovieViewModel class
+        /// Initializes a new instance of the EditMovieViewModel class to edit a movie
         /// </summary>
         public EditMovieViewModel(Movie movie)
         {

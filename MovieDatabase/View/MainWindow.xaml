@@ -37,6 +37,11 @@
             <DataGrid Grid.Column="0" ItemsSource="{Binding Path=movies}" AutoGenerateColumns="True" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectedItem="{Binding Path=selectedMovie, Mode=TwoWay}">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
+                        <ContextMenu.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="IsEnabled" Value="{Binding Path=isMovieSelected}"/>
+                            </Style>
+                        </ContextMenu.ItemContainerStyle>
                         <MenuItem Header="Edit" Command="{Binding openEditCommand}"></MenuItem>
                         <MenuItem Header="Remove" Command="{Binding deleteMovieCommand}"></MenuItem>
                     </ContextMenu>

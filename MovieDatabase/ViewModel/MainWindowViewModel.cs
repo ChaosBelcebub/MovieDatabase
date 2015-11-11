@@ -15,6 +15,7 @@ namespace MovieDatabase.ViewModel
         private MovieList moviesP;
         private Movie selectedMovieP;
         private Database db;
+        private bool isMovieSelectedP;
 
         public MovieList movies
         {
@@ -46,6 +47,31 @@ namespace MovieDatabase.ViewModel
                 {
                     selectedMovieP = value;
                     RaisePropertyChanged("selectedMovie");
+                    if (selectedMovieP != null)
+                    {
+                        isMovieSelected = true;
+                    }
+                    else
+                    {
+                        isMovieSelected = false;
+                    }
+                }
+            }
+        }
+
+        public bool isMovieSelected
+        {
+            get
+            {
+                return isMovieSelectedP;
+            }
+
+            set
+            {
+                if (value != isMovieSelectedP)
+                {
+                    isMovieSelectedP = value;
+                    RaisePropertyChanged("isMovieSelected");
                 }
             }
         }
@@ -55,6 +81,7 @@ namespace MovieDatabase.ViewModel
             this.db = new Database();
             this.moviesP = new MovieList();
             this.loadDatabase();
+            this.isMovieSelected = false;
         }
 
         public void loadDatabase()
@@ -76,8 +103,13 @@ namespace MovieDatabase.ViewModel
             }
         }
 
-        public void openEdit()
+        private void openEdit()
         {
+            if (selectedMovieP == null)
+            {
+                displayError("No movie selected!");
+                return;
+            }
             var vm = new EditMovieViewModel(selectedMovieP);
             var win = new EditMovieView { DataContext = vm };
             vm.OnRequestClose += (s, ev) => win.Close();
@@ -100,8 +132,13 @@ namespace MovieDatabase.ViewModel
             }
         }
 
-        public void deleteMovie()
+        private void deleteMovie()
         {
+            if (selectedMovieP == null)
+            {
+                displayError("No movie selected!");
+                return;
+            }
             MessageBoxResult dialogResult = MessageBox.Show("Remove '" + selectedMovieP.name + "'?", "Remove Movie", MessageBoxButton.YesNo);
             if (dialogResult == MessageBoxResult.Yes)
             {
@@ -122,6 +159,11 @@ namespace MovieDatabase.ViewModel
                 }
                 return this._deleteMovieCommand;
             }
+        }
+
+        private void displayError(String message)
+        {
+            MessageBox.Show(message, "Error");
         }
     }
 }
