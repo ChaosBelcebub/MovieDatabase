@@ -47,6 +47,10 @@ namespace MovieDatabase
             {
                 e.Column.Header = "Location";
             }
+            else if (e.Column.Header.ToString() == "watched")
+            {
+                e.Column.Header = "Watched?";
+            }
             else
             {
                 e.Cancel = true;

@@ -14,6 +14,7 @@ namespace MovieDatabase.ViewModel
         private string nameP;
         private string directorP;
         private string locationP;
+        private bool watchedP;
 
         private ICommand addCommandP;
         private Database db;
@@ -81,6 +82,26 @@ namespace MovieDatabase.ViewModel
         }
 
         /// <summary>
+        /// Bool watched. Contains the watched status of the movie
+        /// </summary>
+        public bool watched
+        {
+            get
+            {
+                return watchedP;
+            }
+
+            set
+            {
+                if (watchedP != value)
+                {
+                    watchedP = value;
+                    RaisePropertyChanged("watched");
+                }
+            }
+        }
+
+        /// <summary>
         /// ICommand addCommand. Calls the addmember() method
         /// </summary>
         public ICommand addCommand
@@ -97,7 +118,7 @@ namespace MovieDatabase.ViewModel
 
         private void addMovie()
         {
-            Movie movie = new Movie { name = name, director = director, location = location };
+            Movie movie = new Movie { name = name, director = director, location = location, watched = watched };
             db.add(movie);
             OnRequestClose(this, new EventArgs());
         }
@@ -112,6 +133,7 @@ namespace MovieDatabase.ViewModel
             name = string.Empty;
             director = string.Empty;
             location = string.Empty;
+            watched = false;
         }
     }
 }

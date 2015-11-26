@@ -21,7 +21,7 @@ namespace MovieDatabase.Model
             if (!File.Exists("Movie.db"))
             {
                 SQLiteConnection.CreateFile("Movie.db");
-                string sql = "create table movies (name varchar(40) not null, director varchar(40) not null, location varchar(40) not null);";
+                string sql = "create table movies (name varchar(40) not null, director varchar(40) not null, location varchar(40) not null, watched integer not null);";
                 SQLiteCommand command = new SQLiteCommand(sql, DatabaseConnection.instance);
                 command.ExecuteNonQuery();
             }
@@ -31,7 +31,7 @@ namespace MovieDatabase.Model
         {
             MovieList importedMovies = new MovieList();
 
-            string sql = "select rowid, name, director, location from movies order by name asc;";
+            string sql = "select rowid, name, director, location, watched from movies order by name asc;";
             SQLiteCommand command = new SQLiteCommand(sql, DatabaseConnection.instance);
             SQLiteDataReader reader = command.ExecuteReader();
             Movie movie;
@@ -42,8 +42,9 @@ namespace MovieDatabase.Model
                 string name = Convert.ToString(reader["name"]);
                 string director = Convert.ToString(reader["director"]);
                 string location = Convert.ToString(reader["location"]);
+                bool watched = Convert.ToBoolean(reader["watched"]);
 
-                movie = new Movie { name = name, director = director, location = location };
+                movie = new Movie { name = name, director = director, location = location, watched = watched };
                 movie.setID(id);
                 importedMovies.Add(movie);
             }
@@ -53,14 +54,14 @@ namespace MovieDatabase.Model
 
         public void add(Movie movie)
         {
-            string sql = "insert into movies values ('" + movie.name + "', '" + movie.director + "', '" + movie.location + "');";
+            string sql = "insert into movies values ('" + movie.name + "', '" + movie.director + "', '" + movie.location + "', " + Convert.ToInt32(movie.watched)+ ");";
             SQLiteCommand command = new SQLiteCommand(sql, DatabaseConnection.instance);
             command.ExecuteNonQuery();
         }
 
         public void edit(Movie movie)
         {
-            string sql = "update movies set name = '" + movie.name + "', director = '" + movie.director + "', location = '" + movie.location + "' where rowid = '" + movie.getID() + "';";
+            string sql = "update movies set name = '" + movie.name + "', director = '" + movie.director + "', location = '" + movie.location + "', watched = " + Convert.ToInt32(movie.watched) + " where rowid = '" + movie.getID() + "';";
             SQLiteCommand command = new SQLiteCommand(sql, DatabaseConnection.instance);
             command.ExecuteNonQuery();
         }

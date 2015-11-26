@@ -15,6 +15,7 @@ namespace MovieDatabase.ViewModel
         private string nameP;
         private string directorP;
         private string locationP;
+        private bool watchedP;
 
         private ICommand editCommandP;
         private Database db;
@@ -82,6 +83,49 @@ namespace MovieDatabase.ViewModel
         }
 
         /// <summary>
+        /// Bool watched. Contains the watched status of the movie
+        /// </summary>
+        public bool watched
+        {
+            get
+            {
+                return watchedP;
+            }
+
+            set
+            {
+                if (watchedP != value)
+                {
+                    watchedP = value;
+                    RaisePropertyChanged("watched");
+                }
+            }
+        }
+
+        /// <summary>
+        /// ICommand editCommand. Calls the editMovie() method
+        /// </summary>
+        public ICommand editCommand
+        {
+            get
+            {
+                if (this.editCommandP == null)
+                {
+                    this.editCommandP = new RelayCommand(param => this.editMovie());
+                }
+                return this.editCommandP;
+            }
+        }
+
+        private void editMovie()
+        {
+            Movie movie = new Movie { name = name, director = director, location = location, watched = watched };
+            movie.setID(id);
+            db.edit(movie);
+            OnRequestClose(this, new EventArgs());
+        }
+
+        /// <summary>
         /// Initializes a new empty instance of the EditMovieViewModel class
         /// </summary>
         public EditMovieViewModel()
@@ -91,6 +135,7 @@ namespace MovieDatabase.ViewModel
             name = string.Empty;
             director = string.Empty;
             location = string.Empty;
+            watched = false;
         }
 
         /// <summary>
@@ -104,6 +149,7 @@ namespace MovieDatabase.ViewModel
             name = movie.name;
             director = movie.director;
             location = movie.location;
+            watched = movie.watched;
         }
     }
 }

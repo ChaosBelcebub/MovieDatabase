@@ -13,6 +13,7 @@ namespace MovieDatabase.Model
         string _name;
         string _director;
         string _location;
+        bool _watched;
 
         // ID as public method. This should prevent the automatic displaying in the datagrid
         public void setID(int id)
@@ -75,6 +76,24 @@ namespace MovieDatabase.Model
                 {
                     this._location = value;
                     this.RaisePropertyChanged("Location");
+                }
+            }
+        }
+
+        // The location of the movie on the disk
+        public bool watched
+        {
+            get
+            {
+                return this._watched;
+            }
+
+            set
+            {
+                if (this._watched != value)
+                {
+                    this._watched = value;
+                    this.RaisePropertyChanged("Watched");
                 }
             }
         }
