@@ -103,6 +103,32 @@ namespace MovieDatabase.ViewModel
             }
         }
 
+        private void openFile()
+        {
+            if (selectedMovieP == null)
+            {
+                displayError("No movie selected!");
+                return;
+            }
+            System.Diagnostics.Process.Start(selectedMovie.location);
+            selectedMovie.watched = true;
+            db.edit(selectedMovie);
+        }
+
+        private ICommand _openFileCommand;
+
+        public ICommand openFileCommand
+        {
+            get
+            {
+                if (this._openFileCommand == null)
+                {
+                    this._openFileCommand = new RelayCommand(param => this.openFile());
+                }
+                return this._openFileCommand;
+            }
+        }
+
         private void openEdit()
         {
             if (selectedMovieP == null)
@@ -158,6 +184,26 @@ namespace MovieDatabase.ViewModel
                     this._deleteMovieCommand = new RelayCommand(param => this.deleteMovie());
                 }
                 return this._deleteMovieCommand;
+            }
+        }
+
+        private void toggleWatched()
+        {
+            selectedMovie.watched = !selectedMovie.watched;
+            db.edit(selectedMovie);
+        }
+
+        private ICommand _toggleWatchedCommand;
+
+        public ICommand toggleWatchedCommand
+        {
+            get
+            {
+                if (this._toggleWatchedCommand == null)
+                {
+                    this._toggleWatchedCommand = new RelayCommand(param => this.toggleWatched());
+                }
+                return this._toggleWatchedCommand;
             }
         }
 

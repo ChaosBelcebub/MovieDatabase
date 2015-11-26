@@ -42,8 +42,10 @@
                                 <Setter Property="IsEnabled" Value="{Binding Path=isMovieSelected}"/>
                             </Style>
                         </ContextMenu.ItemContainerStyle>
+                        <MenuItem Header="Open" Command="{Binding openFileCommand}"></MenuItem>
                         <MenuItem Header="Edit" Command="{Binding openEditCommand}"></MenuItem>
                         <MenuItem Header="Remove" Command="{Binding deleteMovieCommand}"></MenuItem>
+                        <MenuItem Header="Toggle 'Watched?'" Command="{Binding toggleWatchedCommand}"></MenuItem>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
