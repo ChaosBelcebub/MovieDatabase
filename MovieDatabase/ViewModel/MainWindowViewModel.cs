@@ -2,6 +2,7 @@
 using MovieDatabase.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace MovieDatabase.ViewModel
         private Movie selectedMovieP;
         private Database db;
         private bool isMovieSelectedP;
+        private bool isPathNotEmptyP;
 
         public MovieList movies
         {
@@ -50,6 +52,7 @@ namespace MovieDatabase.ViewModel
                     if (selectedMovieP != null)
                     {
                         isMovieSelected = true;
+                        isPathNotEmpty = !string.IsNullOrEmpty(selectedMovie.location);
                     }
                     else
                     {
@@ -76,12 +79,30 @@ namespace MovieDatabase.ViewModel
             }
         }
 
+        public bool isPathNotEmpty
+        {
+            get
+            {
+                return isPathNotEmptyP;
+            }
+
+            set
+            {
+                if (value != isPathNotEmptyP)
+                {
+                    isPathNotEmptyP = value;
+                    RaisePropertyChanged("isPathNotEmpty");
+                }
+            }
+        }
+
         public MainWindowViewModel()
         {
             this.db = new Database();
             this.moviesP = new MovieList();
             this.loadDatabase();
             this.isMovieSelected = false;
+            this.isPathNotEmpty = false;
         }
 
         public void loadDatabase()
@@ -110,7 +131,20 @@ namespace MovieDatabase.ViewModel
                 displayError("No movie selected!");
                 return;
             }
-            System.Diagnostics.Process.Start(selectedMovie.location);
+            try
+            {
+                System.Diagnostics.Process.Start(selectedMovie.location);
+            }
+            catch (Win32Exception)
+            {
+                displayError("Path not found!");
+                return;
+            }
+            catch
+            {
+                displayError("Unknown error occured!");
+                return;
+            }
             selectedMovie.watched = true;
             db.edit(selectedMovie);
         }

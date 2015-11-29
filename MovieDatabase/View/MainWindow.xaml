@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:MovieDatabase.ViewModel"
         xmlns:m="clr-namespace:MovieDatabase.Model"
-        Title="MovieDatabase" Height="350" Width="525"
+        Title="MovieDatabase" Height="500" Width="800"
         DataContext="{DynamicResource MainWindowViewModel}">
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="MainWindowViewModel"/>
@@ -42,7 +42,7 @@
                                 <Setter Property="IsEnabled" Value="{Binding Path=isMovieSelected}"/>
                             </Style>
                         </ContextMenu.ItemContainerStyle>
-                        <MenuItem Header="Open" Command="{Binding openFileCommand}"></MenuItem>
+                        <MenuItem Header="Open" Command="{Binding openFileCommand}" IsEnabled="{Binding isPathNotEmpty}"></MenuItem>
                         <MenuItem Header="Edit" Command="{Binding openEditCommand}"></MenuItem>
                         <MenuItem Header="Remove" Command="{Binding deleteMovieCommand}"></MenuItem>
                         <MenuItem Header="Toggle 'Watched?'" Command="{Binding toggleWatchedCommand}"></MenuItem>
