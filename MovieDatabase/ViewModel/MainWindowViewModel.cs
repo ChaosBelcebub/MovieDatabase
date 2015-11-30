@@ -20,6 +20,7 @@ namespace MovieDatabase.ViewModel
         private Database db;
         private bool isMovieSelectedP;
         private bool isPathNotEmptyP;
+        private String searchP;
 
         public MovieList movies
         {
@@ -94,6 +95,24 @@ namespace MovieDatabase.ViewModel
                 {
                     isPathNotEmptyP = value;
                     RaisePropertyChanged("isPathNotEmpty");
+                }
+            }
+        }
+
+        public String search
+        {
+            get
+            {
+                return searchP;
+            }
+
+            set
+            {
+                if (value != searchP)
+                {
+                    searchP = value;
+                    RaisePropertyChanged("search");
+                    this.movies = this.db.content(searchP);
                 }
             }
         }

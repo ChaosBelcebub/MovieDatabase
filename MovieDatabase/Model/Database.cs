@@ -27,11 +27,22 @@ namespace MovieDatabase.Model
             }
         }
 
-        public MovieList content()
+        public MovieList content(String search = "")
         {
             MovieList importedMovies = new MovieList();
 
-            string sql = "select rowid, name, director, location, watched from movies order by name asc;";
+            String sql = string.Empty;
+            if (search == String.Empty)
+            {
+                sql = "select rowid, name, director, location, watched from movies order by name asc;";
+            }
+            else
+            {
+                sql = "select rowid, name, director, location, watched from movies where name like '%"
+                    + search + "%' or director like '%" + search + "%' or location like '%"
+                    + search + "%' order by name asc;";
+            }
+            
             SQLiteCommand command = new SQLiteCommand(sql, DatabaseConnection.instance);
             SQLiteDataReader reader = command.ExecuteReader();
             Movie movie;

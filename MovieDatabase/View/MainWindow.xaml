@@ -57,9 +57,11 @@
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0" HorizontalAlignment="Center" Content="{lex:Loc add}" Click="Button_Click"/>
+                <TextBox VerticalAlignment="Top" Text="{Binding Path=search, UpdateSourceTrigger=PropertyChanged}" Margin="1,1,1,0" Grid.ColumnSpan="2"/>
+                <Button Grid.Row="1" HorizontalAlignment="Center" Content="{lex:Loc add}" Click="Button_Click"/>
             </Grid>
         </Grid>
         <StatusBar Grid.Row="2">
