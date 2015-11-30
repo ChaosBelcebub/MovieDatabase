@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MovieDatabase.View;
 using MovieDatabase.ViewModel;
+using WPFLocalizeExtension.Extensions;
+using System.Reflection;
 
 namespace MovieDatabase
 {
@@ -37,19 +39,19 @@ namespace MovieDatabase
             // Modify the header of the Name column.
             if (e.Column.Header.ToString() == "name")
             {
-                e.Column.Header = "Name";
+                e.Column.Header = GetLocalizedValue<string>("name");
             }
             else if (e.Column.Header.ToString() == "director")
             {
-                e.Column.Header = "Director";
+                e.Column.Header = GetLocalizedValue<string>("director");
             }
             else if (e.Column.Header.ToString() == "location")
             {
-                e.Column.Header = "Location";
+                e.Column.Header = GetLocalizedValue<string>("location");
             }
             else if (e.Column.Header.ToString() == "watched")
             {
-                e.Column.Header = "Watched?";
+                e.Column.Header = GetLocalizedValue<string>("watched");
             }
             else
             {
@@ -67,6 +69,11 @@ namespace MovieDatabase
 
             var viewModel = DataContext as MainWindowViewModel;
             viewModel.loadDatabase();
+        }
+
+        public static T GetLocalizedValue<T>(string key)
+        {
+            return LocExtension.GetLocalizedValue<T>(Assembly.GetCallingAssembly().GetName().Name + ":Resources:" + key);
         }
     }
 }

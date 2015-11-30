@@ -3,11 +3,13 @@ using MovieDatabase.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using WPFLocalizeExtension.Engine;
 
 namespace MovieDatabase.ViewModel
 {
@@ -103,6 +105,8 @@ namespace MovieDatabase.ViewModel
             this.loadDatabase();
             this.isMovieSelected = false;
             this.isPathNotEmpty = false;
+            LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+            LocalizeDictionary.Instance.Culture = new CultureInfo("de-DE");
         }
 
         public void loadDatabase()

@@ -3,8 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:MovieDatabase.ViewModel"
         xmlns:m="clr-namespace:MovieDatabase.Model"
+        xmlns:r="clr-namespace:System;assembly=mscorlib"
         Title="MovieDatabase" Height="500" Width="800"
-        DataContext="{DynamicResource MainWindowViewModel}">
+        DataContext="{DynamicResource MainWindowViewModel}"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="de-DE"
+        lex:ResxLocalizationProvider.DefaultAssembly="MovieDatabase"
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources">
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="MainWindowViewModel"/>
     </Window.Resources>
@@ -15,13 +20,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Height="25" VerticalAlignment="Top">
-            <MenuItem Header="Datei">
-                <MenuItem Header="Reload Database" HorizontalAlignment="Left" Command="{Binding loadDatabaseCommand, Mode=Default}">
+            <MenuItem Header="{lex:Loc file}">
+                <MenuItem Header="{lex:Loc reload}" HorizontalAlignment="Left" Command="{Binding loadDatabaseCommand, Mode=Default}">
                 </MenuItem>
-                <MenuItem Header="Add Movie" HorizontalAlignment="Left" Click="Button_Click">
+                <MenuItem Header="{lex:Loc add}" HorizontalAlignment="Left" Click="Button_Click">
                 </MenuItem>
                 <Separator HorizontalAlignment="Left" Width="145"/>
-                <MenuItem Header="Exit" HorizontalAlignment="Left" Click="MenuItemClose_Click">
+                <MenuItem Header="{lex:Loc exit}" HorizontalAlignment="Left" Click="MenuItemClose_Click">
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="?">
@@ -42,10 +47,10 @@
                                 <Setter Property="IsEnabled" Value="{Binding Path=isMovieSelected}"/>
                             </Style>
                         </ContextMenu.ItemContainerStyle>
-                        <MenuItem Header="Open" Command="{Binding openFileCommand}" IsEnabled="{Binding isPathNotEmpty}"></MenuItem>
-                        <MenuItem Header="Edit" Command="{Binding openEditCommand}"></MenuItem>
-                        <MenuItem Header="Remove" Command="{Binding deleteMovieCommand}"></MenuItem>
-                        <MenuItem Header="Toggle 'Watched?'" Command="{Binding toggleWatchedCommand}"></MenuItem>
+                        <MenuItem Header="{lex:Loc open}" Command="{Binding openFileCommand}" IsEnabled="{Binding isPathNotEmpty}"></MenuItem>
+                        <MenuItem Header="{lex:Loc edit}" Command="{Binding openEditCommand}"></MenuItem>
+                        <MenuItem Header="{lex:Loc remove}" Command="{Binding deleteMovieCommand}"></MenuItem>
+                        <MenuItem Header="{lex:Loc watchedToggle}" Command="{Binding toggleWatchedCommand}"></MenuItem>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
@@ -54,7 +59,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0" HorizontalAlignment="Center" Content="Add Movie" Click="Button_Click"/>
+                <Button Grid.Row="0" HorizontalAlignment="Center" Content="{lex:Loc add}" Click="Button_Click"/>
             </Grid>
         </Grid>
         <StatusBar Grid.Row="2">
