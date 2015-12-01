@@ -9,7 +9,8 @@
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         lex:LocalizeDictionary.DesignCulture="de-DE"
         lex:ResxLocalizationProvider.DefaultAssembly="MovieDatabase"
-        lex:ResxLocalizationProvider.DefaultDictionary="Resources">
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources"
+        Closing="Window_Closing">
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="MainWindowViewModel"/>
     </Window.Resources>
