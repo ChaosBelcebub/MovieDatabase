@@ -17,6 +17,8 @@ using MovieDatabase.ViewModel;
 using WPFLocalizeExtension.Extensions;
 using System.Reflection;
 using MovieDatabase.Model;
+using System.Globalization;
+using WPFLocalizeExtension.Engine;
 
 namespace MovieDatabase
 {
@@ -25,6 +27,7 @@ namespace MovieDatabase
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string[] language = new string[2] { "en", "de-DE"};
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +39,8 @@ namespace MovieDatabase
             this.Top = userPrefs.WindowTop;
             this.Left = userPrefs.WindowLeft;
             this.WindowState = userPrefs.WindowState;
+            LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+            LocalizeDictionary.Instance.Culture = new CultureInfo(language[userPrefs.Language]);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -96,6 +101,21 @@ namespace MovieDatabase
         public static T GetLocalizedValue<T>(string key)
         {
             return LocExtension.GetLocalizedValue<T>(Assembly.GetCallingAssembly().GetName().Name + ":Resources:" + key);
+        }
+
+        private void Options_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = new OptionViewModel();
+            var win = new OptionView { DataContext = vm };
+            vm.OnRequestClose += (s, ev) => win.Close();
+
+            win.ShowDialog();
+
+            var userPrefs = new UserPreferences();
+            LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+            LocalizeDictionary.Instance.Culture = new CultureInfo(language[userPrefs.Language]);
+            var viewModel = DataContext as MainWindowViewModel;
+            viewModel.loadDatabase();
         }
     }
 }

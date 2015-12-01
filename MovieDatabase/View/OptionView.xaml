@@ -1,0 +1,34 @@
+﻿<Window x:Class="MovieDatabase.View.OptionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:MovieDatabase.ViewModel"
+        xmlns:local="clr-namespace:MovieDatabase.View"
+        mc:Ignorable="d"
+        DataContext="{DynamicResource OptionViewModel}"
+        Title="{lex:Loc options}" Height="80" Width="200"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:LocalizeDictionary.DesignCulture="de-DE"
+        lex:ResxLocalizationProvider.DefaultAssembly="MovieDatabase"
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources">
+    <Window.Resources>
+        <vm:OptionViewModel x:Key="OptionViewModel"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{lex:Loc language}"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" SelectedIndex="{Binding Path=selectedLanguage}">
+            <ComboBoxItem Content="{lex:Loc en}"/>
+            <ComboBoxItem Content="{lex:Loc de}"/>
+        </ComboBox>
+        <Button Grid.Row="4" Grid.Column="1" Content="{lex:Loc save}" HorizontalAlignment="Right" Command="{Binding saveCommand, Mode=Default}" Width="75"/>
+    </Grid>
+</Window>

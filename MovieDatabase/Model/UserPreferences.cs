@@ -13,6 +13,7 @@ namespace MovieDatabase.Model
         private double _windowHeight;
         private double _windowWidth;
         private System.Windows.WindowState _windowState;
+        private int _language;
 
         public double WindowTop
         {
@@ -42,6 +43,12 @@ namespace MovieDatabase.Model
         {
             get { return _windowState; }
             set { _windowState = value; }
+        }
+
+        public int Language
+        {
+            get { return _language; }
+            set { _language = value; }
         }
 
         public UserPreferences()
@@ -107,6 +114,7 @@ namespace MovieDatabase.Model
             _windowHeight = Properties.Settings.Default.WindowHeight;
             _windowWidth = Properties.Settings.Default.WindowWidth;
             _windowState = Properties.Settings.Default.WindowState;
+            _language = Properties.Settings.Default.Language;
         }
 
         public void Save()
@@ -118,6 +126,7 @@ namespace MovieDatabase.Model
                 Properties.Settings.Default.WindowHeight = _windowHeight;
                 Properties.Settings.Default.WindowWidth = _windowWidth;
                 Properties.Settings.Default.WindowState = _windowState;
+                Properties.Settings.Default.Language = _language;
 
                 Properties.Settings.Default.Save();
             }

@@ -124,8 +124,6 @@ namespace MovieDatabase.ViewModel
             this.loadDatabase();
             this.isMovieSelected = false;
             this.isPathNotEmpty = false;
-            LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
-            LocalizeDictionary.Instance.Culture = new CultureInfo("de-DE");
         }
 
         public void loadDatabase()

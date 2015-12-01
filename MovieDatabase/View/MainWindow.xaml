@@ -26,7 +26,10 @@
                 </MenuItem>
                 <MenuItem Header="{lex:Loc add}" HorizontalAlignment="Left" Click="Button_Click">
                 </MenuItem>
-                <Separator HorizontalAlignment="Left" Width="145"/>
+                <Separator/>
+                <MenuItem Header="{lex:Loc options}" HorizontalAlignment="Left" Click="Options_Click">
+                </MenuItem>
+                <Separator/>
                 <MenuItem Header="{lex:Loc exit}" HorizontalAlignment="Left" Click="MenuItemClose_Click">
                 </MenuItem>
             </MenuItem>

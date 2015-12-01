@@ -165,4 +165,16 @@
   <data name="location2" xml:space="preserve">
     <value>Ort:</value>
   </data>
+  <data name="options" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="en" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
+  <data name="de" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
 </root>
