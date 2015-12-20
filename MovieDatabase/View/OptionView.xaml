@@ -7,28 +7,35 @@
         xmlns:local="clr-namespace:MovieDatabase.View"
         mc:Ignorable="d"
         DataContext="{DynamicResource OptionViewModel}"
-        Title="{lex:Loc options}" Height="80" Width="200"
+        Title="{lex:Loc options}" Height="150" Width="200"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         lex:LocalizeDictionary.DesignCulture="de-DE"
         lex:ResxLocalizationProvider.DefaultAssembly="MovieDatabase"
-        lex:ResxLocalizationProvider.DefaultDictionary="Resources">
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources" ResizeMode="CanMinimize">
     <Window.Resources>
         <vm:OptionViewModel x:Key="OptionViewModel"/>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="{lex:Loc language}"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" SelectedIndex="{Binding Path=selectedLanguage}">
-            <ComboBoxItem Content="{lex:Loc en}"/>
-            <ComboBoxItem Content="{lex:Loc de}"/>
-        </ComboBox>
-        <Button Grid.Row="4" Grid.Column="1" Content="{lex:Loc save}" HorizontalAlignment="Right" Command="{Binding saveCommand, Mode=Default}" Width="75"/>
+        <TabControl>
+            <TabItem Header="{lex:Loc general}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{lex:Loc language}"/>
+                    <ComboBox Grid.Row="0" Grid.Column="1" SelectedIndex="{Binding Path=selectedLanguage}">
+                        <ComboBoxItem Content="{lex:Loc en}"/>
+                        <ComboBoxItem Content="{lex:Loc de}"/>
+                    </ComboBox>
+                    <Button Grid.Row="2" Grid.Column="1" Content="{lex:Loc save}" HorizontalAlignment="Right" Command="{Binding saveCommand, Mode=Default}" Width="75"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

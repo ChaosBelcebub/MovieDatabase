@@ -174,4 +174,7 @@
   <data name="language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="general" xml:space="preserve">
+    <value>General</value>
+  </data>
 </root>
